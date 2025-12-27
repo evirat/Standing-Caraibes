@@ -1,0 +1,16 @@
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Ici, vous pouvez initialiser un sélecteur de dates plus complexe
+ overriding
+    // Pour l'exemple, on peut juste simuler un changement de prix
+    const datesInput = document.getElementById('dates');
+    const prixSpan = document.getElementById('prix');
+
+    if (datesInput) {
+        datesInput.addEventListener('change', () => {
+            // Logique simplifiée pour calculer le prix
+            const prix = Math.floor(Math.random() * 1000) + 500; // Prix aléatoire pour l'exemple
+            prixSpan.textContent = `${prix} €`;
+        });
+    }
+});

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standing CARAÏBES RENT' - Guadeloupe</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-brand">
+            <h1>STANDING CARAÏBES RENT'</h1>
+            <img src="Images/logo2.png" alt="Logo Standing Caraïbes" class="logo-img">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#presentation">Présentation</a></li>
+                <li><a href="#location-vehicules">Location Véhicules</a></li>
+                <li><a href="#excursions">Excursions Bateau</a></li>
+                <li><a href="#evenementiel">Événementiel</a></li>
+                <li><a href="#produits-locaux">Produits Locaux</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="presentation">
+        <h2>Votre partenaire pour des vacances inoubliables</h2>
+        
+        <div class="presentation-container">
+            
+            <div class="presentation-text">
+                <h1>Découvrez la Guadeloupe</h1>
+                <p>Entreprise familiale guadeloupéenne, nous vous ouvrons les portes des trésors cachés de notre île paradisiaque. Notre connaissance intime du territoire, transmise de génération en génération, nous permet de créer pour vous des expériences inoubliables et sur-mesure.</p>
+                <h1>Votre satisfaction, notre priorité absolue</h1>
+                <p>Grâce à notre professionnalisme reconnu et notre rigueur sans faille, nous vous garantissons des prestations d'excellence du premier contact jusqu'à la fin de votre séjour. Vivez la Guadeloupe comme vous ne l'avez jamais imaginée !</p>
+            </div>
+
+            <div class="presentation-image">
+                <img src="Images/ile-dom-tom-guadeloupe-1080x675.webp" alt="Présentation Standing Caraïbes">
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="location-vehicules">
+        <h2>Location de véhicules - SUV</h2>
+        <div class="liste-vehicules">
+            <div class="vehicule-card">
+                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+                <h3>Renault Arkana</h3>
+                <p>Type : SUV</p>
+                
+                <div class="reservation-module">
+                    <label>Sélectionnez vos dates :</label>
+                    <div class="date-group">
+                        <div class="date-item">
+                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
+                            <input type="date" id="dateDebut" required onkeydown="return false">
+                        </div>
+                        <div class="date-item">
+                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
+                            <input type="date" id="dateFin" required onkeydown="return false">
+                        </div>
+                    </div>
+                    <p>Prix : <span id="prix">0 €</span></p>
+                    <button>Réserver</button>
+                </div>
+
+                <div class="commentaires">
+                    <h4>Commentaires</h4>
+                    <p>Section pour les commentaires clients.</p>
+                </div>
+            </div>
+            <div class="vehicule-card">
+                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+                <h3>Renault Kadjar</h3>
+                <p>Type : SUV</p>
+                
+                <div class="reservation-module">
+                    <label>Sélectionnez vos dates :</label>
+                    <div class="date-group">
+                        <div class="date-item">
+                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
+                            <input type="date" id="dateDebut" required onkeydown="return false">
+                        </div>
+                        <div class="date-item">
+                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
+                            <input type="date" id="dateFin" required onkeydown="return false">
+                        </div>
+                    </div>
+                    <p>Prix : <span id="prix">0 €</span></p>
+                    <button>Réserver</button>
+                </div>
+
+                <div class="commentaires">
+                    <h4>Commentaires</h4>
+                    <p>Section pour les commentaires clients.</p>
+                </div>
+            </div>
+            <div class="vehicule-card">
+                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+                <h3>Peugeot 3008</h3>
+                <p>Type : SUV</p>
+                
+                <div class="reservation-module">
+                    <label>Sélectionnez vos dates :</label>
+                    <div class="date-group">
+                        <div class="date-item">
+                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
+                            <input type="date" id="dateDebut" required onkeydown="return false">
+                        </div>
+                        <div class="date-item">
+                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
+                            <input type="date" id="dateFin" required onkeydown="return false">
+                        </div>
+                    </div>
+                    <p>Prix : <span id="prix">0 €</span></p>
+                    <button>Réserver</button>
+                </div>
+
+                <div class="commentaires">
+                    <h4>Commentaires</h4>
+                    <p>Section pour les commentaires clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Standing CARAÏBES RENT'. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const PRIX_PAR_JOUR = 50; 
+
+            const debutInput = document.getElementById('dateDebut');
+            const finInput = document.getElementById('dateFin');
+            const afficheurPrix = document.getElementById('prix');
+
+            function calculerPrix() {
+                if (debutInput.value && finInput.value) {
+                    const date1 = new Date(debutInput.value);
+                    const date2 = new Date(finInput.value);
+
+                    const differenceTemps = date2.getTime() - date1.getTime();
+                    let nombreJours = differenceTemps / (1000 * 3600 * 24);
+
+                    if (nombreJours < 1) { nombreJours = 1; }
+
+                    const total = nombreJours * PRIX_PAR_JOUR;
+
+                    afficheurPrix.textContent = total + " €";
+                    afficheurPrix.style.color = "#0056b3"; 
+                } else {
+                    afficheurPrix.textContent = "0 €";
+                }
+            }
+
+            debutInput.addEventListener('change', function() {
+                if (this.value) {
+                    finInput.min = this.value;
+                    if (finInput.value && finInput.value < this.value) {
+                        finInput.value = '';
+                        afficheurPrix.textContent = "0 €";
+                    } else {
+                        calculerPrix();
+                    }
+                }
+            });
+
+            finInput.addEventListener('change', function() {
+                calculerPrix();
+            });
+        });
+    </script>
+</body>
+</html>
