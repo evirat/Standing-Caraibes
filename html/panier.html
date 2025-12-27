@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - Standing CARAÏBES RENT'</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-brand">
+            <h1>STANDING CARAÏBES RENT'</h1>
+            <img src="../Images/logo2.png" alt="Logo Standing Caraïbes" class="logo-img">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../index.html">Location Véhicules</a></li>
+                <li><a href="excursions.html">Excursions Bateau</a></li>
+                <li><a href="#evenementiel">Événementiel</a></li>
+                <li><a href="#produits-locaux">Produits Locaux</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="panier-section">
+        <h2>Votre Réservation</h2>
+        
+        <div id="contenu-panier" class="panier-container">
+            <p>Votre panier est vide.</p>
+        </div>
+
+        <div id="total-block" style="display:none; text-align:right; margin-top:20px; font-size:1.5rem;">
+            Total à payer : <span id="prix-total" style="color:#0056b3; font-weight:bold;">0 €</span>
+        </div>
+
+        <div id="formulaire-paiement" style="display:none; margin-top:40px; background:white; padding:20px; border-radius:10px;">
+            <h3>Finaliser la commande</h3>
+            <form onsubmit="validerCommande(event)">
+                <label>Nom complet :</label>
+                <input type="text" required style="width:100%; padding:10px; margin-bottom:10px;">
+                
+                <label>Email :</label>
+                <input type="email" required style="width:100%; padding:10px; margin-bottom:10px;">
+                
+                <button type="submit" style="width:100%; padding:15px; background-color:#28a745; color:white; border:none; font-size:1.2rem; cursor:pointer;">
+                    💳 Payer et Valider
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Standing CARAÏBES RENT'. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Ce script s'exécute quand on ouvre la page Panier
+        document.addEventListener('DOMContentLoaded', function() {
+            const panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            const container = document.getElementById('contenu-panier');
+            const totalBlock = document.getElementById('total-block');
+            const formBlock = document.getElementById('formulaire-paiement');
+            const totalSpan = document.getElementById('prix-total');
+
+            if (panier.length > 0) {
+                container.innerHTML = ''; // On vide le message "vide"
+                let total = 0;
+
+                // On boucle sur chaque article du panier
+                panier.forEach((article, index) => {
+                    total += parseFloat(article.prix);
+                    
+                    const div = document.createElement('div');
+                    div.className = 'article-panier';
+                    div.innerHTML = `
+                        <div style="flex:1">
+                            <h3>${article.titre}</h3>
+                            <p>Dates : Du ${article.debut} au ${article.fin}</p>
+                        </div>
+                        <div style="text-align:right">
+                            <p style="color:#0056b3; font-weight:bold; font-size:1.2rem;">${article.prix} €</p>
+                            <button onclick="supprimerArticle(${index})" style="background:red; color:white; border:none; padding:5px 10px; cursor:pointer; font-size:0.8rem;">Supprimer</button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+
+                totalSpan.textContent = total + " €";
+                totalBlock.style.display = 'block';
+                formBlock.style.display = 'block';
+            }
+        });
+
+        function supprimerArticle(index) {
+            let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            panier.splice(index, 1); // On retire l'élément
+            localStorage.setItem('monPanier', JSON.stringify(panier)); // On sauvegarde
+            location.reload(); // On recharge la page
+        }
+
+        function validerCommande(e) {
+            e.preventDefault();
+            alert("Merci ! Votre demande de réservation a été envoyée. Nous vous contacterons pour le paiement.");
+            localStorage.removeItem('monPanier'); // On vide le panier
+            window.location.href = 'index.html'; // Retour accueil
+        }
+    </script>
+</body>
+</html>

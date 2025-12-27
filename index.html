@@ -16,11 +16,12 @@
 
         <nav>
             <ul>
-                <li><a href="#presentation">Présentation</a></li>
+                <li><a href="#presentation">Accueil</a></li>
                 <li><a href="#location-vehicules">Location Véhicules</a></li>
-                <li><a href="#excursions">Excursions Bateau</a></li>
-                <li><a href="#evenementiel">Événementiel</a></li>
+                <li><a href="html/excursions.html">Excursions Bateau</a></li>
+                <li><a href="html/evenementiel.html">Événementiel</a></li>
                 <li><a href="#produits-locaux">Produits Locaux</a></li>
+                <li><a href="html/panier.html" style="color:#ffd700;">🛒 Mon Panier</a></li>
             </ul>
         </nav>
     </header>
@@ -135,36 +136,68 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const PRIX_PAR_JOUR = 50; 
-
             const debutInput = document.getElementById('dateDebut');
             const finInput = document.getElementById('dateFin');
             const afficheurPrix = document.getElementById('prix');
+            // On sélectionne le bouton réserver qui est dans le même module
+            const boutonReserver = document.querySelector('.reservation-module button');
+            let prixFinal = 0;
 
             function calculerPrix() {
                 if (debutInput.value && finInput.value) {
                     const date1 = new Date(debutInput.value);
                     const date2 = new Date(finInput.value);
-
                     const differenceTemps = date2.getTime() - date1.getTime();
                     let nombreJours = differenceTemps / (1000 * 3600 * 24);
 
                     if (nombreJours < 1) { nombreJours = 1; }
 
-                    const total = nombreJours * PRIX_PAR_JOUR;
+                    prixFinal = nombreJours * PRIX_PAR_JOUR;
 
-                    afficheurPrix.textContent = total + " €";
+                    afficheurPrix.textContent = prixFinal + " €";
                     afficheurPrix.style.color = "#0056b3"; 
                 } else {
+                    prixFinal = 0;
                     afficheurPrix.textContent = "0 €";
                 }
             }
 
+            // --- NOUVEAU : FONCTION AJOUTER AU PANIER ---
+            boutonReserver.addEventListener('click', function() {
+                if (prixFinal > 0 && debutInput.value && finInput.value) {
+                    
+                    // 1. Créer l'objet commande
+                    const commande = {
+                        titre: "Location SUV - Standing Caraïbes",
+                        debut: debutInput.value,
+                        fin: finInput.value,
+                        prix: prixFinal
+                    };
+
+                    // 2. Récupérer le panier existant ou en créer un vide
+                    let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+                    
+                    // 3. Ajouter la nouvelle commande
+                    panier.push(commande);
+
+                    // 4. Sauvegarder dans la mémoire du navigateur
+                    localStorage.setItem('monPanier', JSON.stringify(panier));
+
+                    // 5. Rediriger vers la page panier
+                    window.location.href = 'html/panier.html';
+
+                } else {
+                    alert("Veuillez sélectionner des dates valides.");
+                }
+            });
+
+            // Écouteurs pour le calcul
             debutInput.addEventListener('change', function() {
                 if (this.value) {
                     finInput.min = this.value;
                     if (finInput.value && finInput.value < this.value) {
                         finInput.value = '';
-                        afficheurPrix.textContent = "0 €";
+                        calculerPrix();
                     } else {
                         calculerPrix();
                     }
