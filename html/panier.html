@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Panier - Standing CARAÏBES RENT'</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Styles spécifiques au panier */
+        .panier-container { max-width: 800px; margin: 40px auto; padding: 20px; min-height: 300px;}
+        .article-panier { 
+            background: #fff; border: 1px solid #ddd; padding: 20px; margin-bottom: 15px; 
+            border-radius: 8px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        /* Bouton de validation WhatsApp */
+        .btn-valider {
+            background-color: #25D366; /* Vert WhatsApp */
+            color: white; border: none; padding: 15px 30px; 
+            font-size: 1.2em; border-radius: 50px; cursor: pointer; 
+            display: block; width: 100%; max-width: 400px; margin: 20px auto;
+            font-weight: bold; text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s;
+            text-decoration: none; text-align: center;
+        }
+        .btn-valider:hover { transform: scale(1.05); background-color: #1ebe57; }
+    </style>
 </head>
 <body>
 
@@ -19,37 +40,38 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="../index.html">Location Véhicules</a></li>
                 <li><a href="excursions.html">Excursions Bateau</a></li>
-                <li><a href="#evenementiel">Événementiel</a></li>
+                <li><a href="../html/evenementiel.html">Événementiel</a></li>
                 <li><a href="#produits-locaux">Produits Locaux</a></li>
+                <li><a href="../html/panier.html" style="color:#ffd700;">🛒 Mon Panier</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="panier-section">
-        <h2>Votre Réservation</h2>
+        <h2 style="text-align:center; margin-top:40px;">Votre Réservation</h2>
         
         <div id="contenu-panier" class="panier-container">
-            <p>Votre panier est vide.</p>
+            <p style="text-align:center;">Votre panier est vide.</p>
         </div>
 
-        <div id="total-block" style="display:none; text-align:right; margin-top:20px; font-size:1.5rem;">
-            Total à payer : <span id="prix-total" style="color:#0056b3; font-weight:bold;">0 €</span>
+        <div id="total-block" style="display:none; max-width:800px; margin:0 auto; padding:20px;">
+            <div style="text-align:right; font-size:1.5rem; margin-bottom:20px;">
+                Total estimé : <span id="prix-total" style="color:#0056b3; font-weight:bold;">0 €</span>
+            </div>
+
+            <div style="text-align:center; background:#f9f9f9; padding:30px; border-radius:15px;">
+                <h3 style="color:#0a2351;">Valider ma réservation</h3>
+                <p>Cliquez ci-dessous pour envoyer votre demande de réservation directement sur notre WhatsApp. Nous vous confirmerons la disponibilité immédiatement.</p>
+                
+                <a id="lien-whatsapp" href="#" class="btn-valider">
+                    Envoyer la demande via WhatsApp 📞
+                </a>
+                
+                <br>
+                <button onclick="viderPanier()" style="background:none; border:none; text-decoration:underline; cursor:pointer; color:#888;">Vider le panier</button>
+            </div>
         </div>
 
-        <div id="formulaire-paiement" style="display:none; margin-top:40px; background:white; padding:20px; border-radius:10px;">
-            <h3>Finaliser la commande</h3>
-            <form onsubmit="validerCommande(event)">
-                <label>Nom complet :</label>
-                <input type="text" required style="width:100%; padding:10px; margin-bottom:10px;">
-                
-                <label>Email :</label>
-                <input type="email" required style="width:100%; padding:10px; margin-bottom:10px;">
-                
-                <button type="submit" style="width:100%; padding:15px; background-color:#28a745; color:white; border:none; font-size:1.2rem; cursor:pointer;">
-                    💳 Payer et Valider
-                </button>
-            </form>
-        </div>
     </section>
 
     <footer>
@@ -57,55 +79,70 @@
     </footer>
 
     <script>
-        // Ce script s'exécute quand on ouvre la page Panier
+        // CONFIGURATION : Mettez votre numéro de téléphone ici (Format international sans le +)
+        // Exemple pour la Guadeloupe (+590) : 590690123456
+        const NUMERO_WHATSAPP = "590690409686"; 
+
         document.addEventListener('DOMContentLoaded', function() {
             const panier = JSON.parse(localStorage.getItem('monPanier')) || [];
             const container = document.getElementById('contenu-panier');
             const totalBlock = document.getElementById('total-block');
-            const formBlock = document.getElementById('formulaire-paiement');
             const totalSpan = document.getElementById('prix-total');
+            const btnWhatsApp = document.getElementById('lien-whatsapp');
+            
+            let montantTotal = 0;
+            let messageDetails = "";
 
             if (panier.length > 0) {
-                container.innerHTML = ''; // On vide le message "vide"
-                let total = 0;
-
-                // On boucle sur chaque article du panier
+                container.innerHTML = '';
+                
                 panier.forEach((article, index) => {
-                    total += parseFloat(article.prix);
+                    let prix = parseFloat(article.prixTotal || article.prix); // Sécurité nom variable
+                    montantTotal += prix;
                     
+                    // On construit le message pour WhatsApp en même temps
+                    messageDetails += `- ${article.titre} du ${article.debut} au ${article.fin} (${prix}€)%0A`;
+
+                    // Affichage HTML
                     const div = document.createElement('div');
                     div.className = 'article-panier';
                     div.innerHTML = `
                         <div style="flex:1">
                             <h3>${article.titre}</h3>
-                            <p>Dates : Du ${article.debut} au ${article.fin}</p>
+                            <p>Dates : Du <strong>${article.debut}</strong> au <strong>${article.fin}</strong></p>
                         </div>
                         <div style="text-align:right">
-                            <p style="color:#0056b3; font-weight:bold; font-size:1.2rem;">${article.prix} €</p>
-                            <button onclick="supprimerArticle(${index})" style="background:red; color:white; border:none; padding:5px 10px; cursor:pointer; font-size:0.8rem;">Supprimer</button>
+                            <p style="color:#0056b3; font-weight:bold; font-size:1.2rem;">${prix} €</p>
+                            <button onclick="supprimerArticle(${index})" style="background:#ff4444; color:white; border:none; padding:5px 10px; cursor:pointer; border-radius:4px;">Supprimer</button>
                         </div>
                     `;
                     container.appendChild(div);
                 });
 
-                totalSpan.textContent = total + " €";
+                // Mise à jour du Total
+                totalSpan.textContent = montantTotal + " €";
                 totalBlock.style.display = 'block';
-                formBlock.style.display = 'block';
+
+                // Création du lien WhatsApp Dynamique
+                // %0A veut dire "Saut de ligne"
+                let texteFinal = `Bonjour, je souhaite réserver :%0A%0A${messageDetails}%0ATotal : ${montantTotal}€.%0A%0AMerci de me confirmer la disponibilité.`;
+                
+                btnWhatsApp.href = `https://wa.me/${NUMERO_WHATSAPP}?text=${texteFinal}`;
             }
         });
 
         function supprimerArticle(index) {
             let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
-            panier.splice(index, 1); // On retire l'élément
-            localStorage.setItem('monPanier', JSON.stringify(panier)); // On sauvegarde
-            location.reload(); // On recharge la page
+            panier.splice(index, 1);
+            localStorage.setItem('monPanier', JSON.stringify(panier));
+            location.reload(); // On recharge la page pour mettre à jour
         }
 
-        function validerCommande(e) {
-            e.preventDefault();
-            alert("Merci ! Votre demande de réservation a été envoyée. Nous vous contacterons pour le paiement.");
-            localStorage.removeItem('monPanier'); // On vide le panier
-            window.location.href = 'index.html'; // Retour accueil
+        function viderPanier() {
+            if(confirm("Voulez-vous vider le panier ?")) {
+                localStorage.removeItem('monPanier');
+                location.reload();
+            }
         }
     </script>
 </body>

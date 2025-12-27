@@ -30,26 +30,24 @@
         <h2>Votre partenaire pour des vacances inoubliables</h2>
         
         <div class="presentation-container">
-            
             <div class="presentation-text">
                 <h1>Découvrez la Guadeloupe</h1>
                 <p>Entreprise familiale guadeloupéenne, nous vous ouvrons les portes des trésors cachés de notre île paradisiaque. Notre connaissance intime du territoire, transmise de génération en génération, nous permet de créer pour vous des expériences inoubliables et sur-mesure.</p>
                 <h1>Votre satisfaction, notre priorité absolue</h1>
                 <p>Grâce à notre professionnalisme reconnu et notre rigueur sans faille, nous vous garantissons des prestations d'excellence du premier contact jusqu'à la fin de votre séjour. Vivez la Guadeloupe comme vous ne l'avez jamais imaginée !</p>
             </div>
-
             <div class="presentation-image">
                 <img src="Images/ile-dom-tom-guadeloupe-1080x675.webp" alt="Présentation Standing Caraïbes">
             </div>
-            
         </div>
     </section>
 
     <section id="location-vehicules">
         <h2>Location de véhicules - SUV</h2>
         <div class="liste-vehicules">
-            <div class="vehicule-card">
-                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+            
+            <div class="vehicule-card" data-nom="Renault Arkana" data-prix="60">
+                <img src="Images/SUV1.jpg" alt="Renault Arkana">
                 <h3>Renault Arkana</h3>
                 <p>Type : SUV</p>
                 
@@ -57,25 +55,22 @@
                     <label>Sélectionnez vos dates :</label>
                     <div class="date-group">
                         <div class="date-item">
-                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
-                            <input type="date" id="dateDebut" required onkeydown="return false">
+                            <label>Départ :</label>
+                            <input type="date" class="date-debut" required onkeydown="return false">
                         </div>
                         <div class="date-item">
-                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
-                            <input type="date" id="dateFin" required onkeydown="return false">
+                            <label>Retour :</label>
+                            <input type="date" class="date-fin" required onkeydown="return false">
                         </div>
                     </div>
-                    <p>Prix : <span id="prix">0 €</span></p>
-                    <button>Réserver</button>
+                    <p>Prix : <span class="prix-display">0 €</span></p>
+                    <button class="btn-reserver">Réserver</button>
                 </div>
-
-                <div class="commentaires">
-                    <h4>Commentaires</h4>
-                    <p>Section pour les commentaires clients.</p>
-                </div>
+                <div class="commentaires"><h4>Caractéristiques</h4><p>Climatisation, GPS, Auto.</p></div>
             </div>
-            <div class="vehicule-card">
-                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+
+            <div class="vehicule-card" data-nom="Renault Kadjar" data-prix="50">
+                <img src="Images/SUV1.jpg" alt="Renault Kadjar">
                 <h3>Renault Kadjar</h3>
                 <p>Type : SUV</p>
                 
@@ -83,25 +78,22 @@
                     <label>Sélectionnez vos dates :</label>
                     <div class="date-group">
                         <div class="date-item">
-                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
-                            <input type="date" id="dateDebut" required onkeydown="return false">
+                            <label>Départ :</label>
+                            <input type="date" class="date-debut" required onkeydown="return false">
                         </div>
                         <div class="date-item">
-                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
-                            <input type="date" id="dateFin" required onkeydown="return false">
+                            <label>Retour :</label>
+                            <input type="date" class="date-fin" required onkeydown="return false">
                         </div>
                     </div>
-                    <p>Prix : <span id="prix">0 €</span></p>
-                    <button>Réserver</button>
+                    <p>Prix : <span class="prix-display">0 €</span></p>
+                    <button class="btn-reserver">Réserver</button>
                 </div>
-
-                <div class="commentaires">
-                    <h4>Commentaires</h4>
-                    <p>Section pour les commentaires clients.</p>
-                </div>
+                <div class="commentaires"><h4>Caractéristiques</h4><p>Diesel, 5 Places.</p></div>
             </div>
-            <div class="vehicule-card">
-                <img src="Images/SUV1.jpg" alt="Photo du véhicule">
+
+            <div class="vehicule-card" data-nom="Peugeot 3008" data-prix="55">
+                <img src="Images/SUV1.jpg" alt="Peugeot 3008">
                 <h3>Peugeot 3008</h3>
                 <p>Type : SUV</p>
                 
@@ -109,23 +101,20 @@
                     <label>Sélectionnez vos dates :</label>
                     <div class="date-group">
                         <div class="date-item">
-                            <label for="dateDebut" style="font-size: 0.9em;">Départ :</label>
-                            <input type="date" id="dateDebut" required onkeydown="return false">
+                            <label>Départ :</label>
+                            <input type="date" class="date-debut" required onkeydown="return false">
                         </div>
                         <div class="date-item">
-                            <label for="dateFin" style="font-size: 0.9em;">Retour :</label>
-                            <input type="date" id="dateFin" required onkeydown="return false">
+                            <label>Retour :</label>
+                            <input type="date" class="date-fin" required onkeydown="return false">
                         </div>
                     </div>
-                    <p>Prix : <span id="prix">0 €</span></p>
-                    <button>Réserver</button>
+                    <p>Prix : <span class="prix-display">0 €</span></p>
+                    <button class="btn-reserver">Réserver</button>
                 </div>
-
-                <div class="commentaires">
-                    <h4>Commentaires</h4>
-                    <p>Section pour les commentaires clients.</p>
-                </div>
+                <div class="commentaires"><h4>Caractéristiques</h4><p>Toit panoramique.</p></div>
             </div>
+
         </div>
     </section>
 
@@ -135,77 +124,73 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const PRIX_PAR_JOUR = 50; 
-            const debutInput = document.getElementById('dateDebut');
-            const finInput = document.getElementById('dateFin');
-            const afficheurPrix = document.getElementById('prix');
-            // On sélectionne le bouton réserver qui est dans le même module
-            const boutonReserver = document.querySelector('.reservation-module button');
-            let prixFinal = 0;
+            
+            // 1. On sélectionne toutes les voitures
+            const cartes = document.querySelectorAll('.vehicule-card');
 
-            function calculerPrix() {
-                if (debutInput.value && finInput.value) {
-                    const date1 = new Date(debutInput.value);
-                    const date2 = new Date(finInput.value);
-                    const differenceTemps = date2.getTime() - date1.getTime();
-                    let nombreJours = differenceTemps / (1000 * 3600 * 24);
+            // 2. On boucle sur chaque voiture
+            cartes.forEach(function(carte) {
+                
+                // On récupère le prix spécifique de LA voiture (depuis data-prix)
+                const prixParJour = parseInt(carte.getAttribute('data-prix'));
+                const nomVehicule = carte.getAttribute('data-nom');
+                
+                // On cherche les inputs À L'INTÉRIEUR de cette carte uniquement
+                const debutInput = carte.querySelector('.date-debut');
+                const finInput = carte.querySelector('.date-fin');
+                const afficheurPrix = carte.querySelector('.prix-display');
+                const bouton = carte.querySelector('.btn-reserver');
+                
+                let prixFinal = 0;
 
-                    if (nombreJours < 1) { nombreJours = 1; }
+                // Fonction de calcul
+                function calculer() {
+                    if (debutInput.value && finInput.value) {
+                        const d1 = new Date(debutInput.value);
+                        const d2 = new Date(finInput.value);
+                        const diff = d2 - d1;
+                        let jours = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-                    prixFinal = nombreJours * PRIX_PAR_JOUR;
+                        if (jours < 1) jours = 1; // Minimum 1 jour
 
-                    afficheurPrix.textContent = prixFinal + " €";
-                    afficheurPrix.style.color = "#0056b3"; 
-                } else {
-                    prixFinal = 0;
-                    afficheurPrix.textContent = "0 €";
-                }
-            }
-
-            // --- NOUVEAU : FONCTION AJOUTER AU PANIER ---
-            boutonReserver.addEventListener('click', function() {
-                if (prixFinal > 0 && debutInput.value && finInput.value) {
-                    
-                    // 1. Créer l'objet commande
-                    const commande = {
-                        titre: "Location SUV - Standing Caraïbes",
-                        debut: debutInput.value,
-                        fin: finInput.value,
-                        prix: prixFinal
-                    };
-
-                    // 2. Récupérer le panier existant ou en créer un vide
-                    let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
-                    
-                    // 3. Ajouter la nouvelle commande
-                    panier.push(commande);
-
-                    // 4. Sauvegarder dans la mémoire du navigateur
-                    localStorage.setItem('monPanier', JSON.stringify(panier));
-
-                    // 5. Rediriger vers la page panier
-                    window.location.href = 'html/panier.html';
-
-                } else {
-                    alert("Veuillez sélectionner des dates valides.");
-                }
-            });
-
-            // Écouteurs pour le calcul
-            debutInput.addEventListener('change', function() {
-                if (this.value) {
-                    finInput.min = this.value;
-                    if (finInput.value && finInput.value < this.value) {
-                        finInput.value = '';
-                        calculerPrix();
+                        prixFinal = jours * prixParJour;
+                        afficheurPrix.textContent = prixFinal + " €";
+                        afficheurPrix.style.color = "#0056b3";
+                        afficheurPrix.style.fontWeight = "bold";
                     } else {
-                        calculerPrix();
+                        prixFinal = 0;
+                        afficheurPrix.textContent = "0 €";
                     }
                 }
-            });
 
-            finInput.addEventListener('change', function() {
-                calculerPrix();
+                // Ecouteurs sur les dates
+                debutInput.addEventListener('change', function() {
+                    finInput.min = this.value;
+                    calculer();
+                });
+                finInput.addEventListener('change', calculer);
+
+                // Clic sur Réserver
+                bouton.addEventListener('click', function() {
+                    if (prixFinal > 0 && debutInput.value && finInput.value) {
+                        
+                        const commande = {
+                            titre: nomVehicule,
+                            debut: debutInput.value,
+                            fin: finInput.value,
+                            prixTotal: prixFinal
+                        };
+
+                        let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+                        panier.push(commande);
+                        localStorage.setItem('monPanier', JSON.stringify(panier));
+
+                        // Redirection
+                        window.location.href = 'html/panier.html';
+                    } else {
+                        alert("Veuillez sélectionner des dates valides.");
+                    }
+                });
             });
         });
     </script>

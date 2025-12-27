@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci - Standing CARAÏBES RENT'</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        .merci-section {
+            min-height: 60vh; /* La section prend au moins 60% de la hauteur de l'écran */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #28a745; /* Vert succès */
+            margin-bottom: 20px;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .order-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(10, 35, 81, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 30px;
+            border-top: 5px solid #ffd700; /* La touche Or */
+        }
+
+        .btn-retour {
+            display: inline-block;
+            background: linear-gradient(to right, #0a2351, #1a3c7a); /* Bleu Foncé Marque */
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px; /* Bouton bien arrondi */
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(10, 35, 81, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-retour:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(10, 35, 81, 0.4);
+            color: #ffd700; /* Le texte devient Or au survol */
+        }
+
+        /* Petite animation de l'icône */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-brand">
+            <a href="index.html" style="text-decoration:none;">
+                <h1>STANDING CARAÏBES RENT'</h1>
+            </a>
+            <img src="../Images/logo2.png" alt="Logo" class="logo-img">
+        </div>
+        </header>
+
+    <section class="merci-section">
+        
+        <div class="success-icon">✓</div>
+
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Merci de votre confiance !</h2>
+        <p style="font-size: 1.2rem; color: #546e7a; margin-bottom: 40px;">Votre réservation a bien été prise en compte.</p>
+
+        <div class="order-details">
+            <h3 style="color:#0a2351;">Que va-t-il se passer maintenant ?</h3>
+            <p style="text-align: left; line-height: 1.8;">
+                1. Vous allez recevoir un <strong>email de confirmation</strong> de paiement (via PayPal).<br>
+                2. Notre équipe va valider la disponibilité du véhicule et vous contacter sous 24h pour organiser la remise des clés.<br>
+                3. Préparez votre permis de conduire, le soleil vous attend !
+            </p>
+        </div>
+
+        <a href="../index.html" class="btn-retour">Retour à l'accueil</a>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Standing CARAÏBES RENT'. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
