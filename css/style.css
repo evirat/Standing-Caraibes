@@ -10,6 +10,12 @@ body {
     line-height: 1.6;
 }
 
+/* SÉCURITÉ IMAGE : Empêche toute image de dépasser de l'écran */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* =========================================
    2. HEADER & NAVIGATION
    ========================================= */
@@ -23,34 +29,30 @@ header {
     z-index: 1000;
 }
 
-/* NOUVEAU : La boite qui gère l'alignement Titre + Logo */
 .header-brand {
     display: flex;
-    align-items: center;    /* Centre verticalement */
-    justify-content: center; /* Centre le tout au milieu de la page */
-    gap: 15px;              /* Espace entre le titre et le logo */
-    padding: 0 10px;        /* Marge de sécurité sur les côtés */
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 10px;
 }
 
 header h1 {
     margin: 0;
-    /* padding: 0 20px;  <- J'ai enlevé ça car le 'gap' gère l'espace maintenant */
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    /* text-align: center; <- Enlevé car géré par le flexbox */
-    color: #ffd700; /* Votre Or */
+    color: #ffd700; /* Or */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    line-height: 1; /* Empêche le titre de prendre trop de hauteur inutilement */
+    line-height: 1;
 }
 
-/* NOUVEAU : Le style du Logo (Petit et Rond) */
 .logo-img {
-    height: 50px;           /* Taille réduite comme demandé */
-    width: auto;            /* Largeur automatique */
+    height: 50px;
+    width: auto;
 }
 
-/* --- VOTRE NAV (INCHANGÉE) --- */
+/* --- NAV PC (Cachée sur mobile via Media Query plus bas) --- */
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -78,16 +80,6 @@ nav ul li a {
 nav ul li a:hover {
     color: #ffd700;
     border-bottom: 2px solid #ffd700;
-}
-
-/* --- ADAPTATION MOBILE (Petit bonus pour que le titre ne casse pas tout) --- */
-@media screen and (max-width: 600px) {
-    header h1 {
-        font-size: 1.2rem; /* Titre plus petit sur téléphone */
-    }
-    .logo-img {
-        height: 40px;      /* Logo encore un peu plus petit sur téléphone */
-    }
 }
 
 /* =========================================
@@ -121,26 +113,21 @@ h2::after {
 }
 
 /* =========================================
-   4. NOUVEAU : SECTION PRÉSENTATION ENCADRÉE
+   4. PRÉSENTATION
    ========================================= */
-
-
-/* Le cadre principal qui contient texte + image */
 .presentation-container {
-    display: flex;          /* Met le texte et l'image côte à côte */
-    align-items: center;    /* Centre verticalement */
-    gap: 40px;              /* Espace entre le texte et l'image */
-    background-color: #fff; /* Fond blanc pour le cadre */
-    padding: 40px;          /* Espace à l'intérieur du cadre */
-    border-radius: 20px;    /* Coins bien arrondis */
-    /* Ombre portée douce et bleutée pour l'effet "encadré" */
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(10, 35, 81, 0.08);
-    border: 1px solid rgba(10, 35, 81, 0.05); /* Fine bordure subtile */
+    border: 1px solid rgba(10, 35, 81, 0.05);
 }
 
-/* La partie texte à gauche */
 .presentation-text {
-    flex: 1; /* Prend l'espace disponible */
+    flex: 1;
 }
 
 .presentation-text p {
@@ -149,31 +136,22 @@ h2::after {
     color: #546e7a;
 }
 
-.presentation-text p:last-child {
-    margin-bottom: 0;
-}
-
-/* La partie image à droite */
 .presentation-image {
-    flex: 1; /* Prend autant d'espace que le texte */
+    flex: 1;
     display: flex;
     justify-content: center;
 }
 
 .presentation-image img {
-    max-width: 100%;      /* L'image ne dépasse pas son conteneur */
-    height: auto;         /* Hauteur automatique */
-    border-radius: 15px;  /* Coins arrondis pour l'image aussi */
-    /* Petite ombre et bordure dorée pour l'image */
+    border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-bottom: 4px solid #ffd700;
-    object-fit: cover; /* Remplit bien le cadre si besoin */
-    max-height: 400px; /* Limite la hauteur pour ne pas être trop grand */
+    object-fit: cover;
+    max-height: 400px;
 }
 
-
 /* =========================================
-   5. CARTES VÉHICULES
+   5. CARTES VÉHICULES (CORRIGÉ POUR MOBILE)
    ========================================= */
 .liste-vehicules {
     display: flex;
@@ -185,8 +163,11 @@ h2::after {
 .vehicule-card {
     background-color: #fff;
     border-radius: 15px;
-    width: 340px;
-    max-width: 100%;
+    
+    /* MODIFICATION IMPORTANTE ICI POUR LE MOBILE */
+    width: 100%;       /* Prend toute la largeur dispo */
+    max-width: 340px;  /* Mais ne dépasse pas 340px */
+    
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(10, 35, 81, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -217,6 +198,12 @@ h2::after {
     margin: 0 25px 20px;
     color: #546e7a;
     font-size: 0.95rem;
+}
+
+.commentaires {
+    padding: 0 25px 20px;
+    font-size: 0.9em;
+    color: #666;
 }
 
 /* =========================================
@@ -259,12 +246,6 @@ h2::after {
     cursor: pointer;
 }
 
-.reservation-module input[type="date"]:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-    outline: none;
-}
-
 .reservation-module p {
     font-size: 1.2rem;
     font-weight: 700;
@@ -273,8 +254,8 @@ h2::after {
     text-align: center;
 }
 
-.reservation-module span#prix {
-    color: #0056b3; /* Bleu Roi */
+.reservation-module span.prix-display {
+    color: #0056b3;
     font-size: 1.5rem;
     font-weight: 800;
 }
@@ -297,7 +278,6 @@ h2::after {
 .reservation-module button:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-    background: linear-gradient(to right, #ffe066, #ffd700);
 }
 
 /* =========================================
@@ -312,57 +292,120 @@ footer {
     margin-top: 60px;
 }
 
-/* =========================================
-   8. MEDIA QUERIES (Adaptation Mobile)
-   ========================================= */
+/* =======================================================
+   8. RESPONSIVE DESIGN (Tablettes & Mobiles)
+   ======================================================= */
+
+/* --- TABLETTES (Max 900px) --- */
 @media screen and (max-width: 900px) {
-    /* Sur tablette, on passe l'image EN DESSOUS du texte */
     .presentation-container {
         flex-direction: column;
         gap: 30px;
         padding: 30px;
     }
-
-    .presentation-image img {
-        max-height: 300px; /* Image moins haute sur tablette */
-        width: 100%;
-    }
 }
 
-@media screen and (max-width: 600px) {
-    header h1 {
-        font-size: 1.2rem;
-    }
-    .logo-img {
-        height: 40px;
-    }
+/* --- MENU BURGER (Config par défaut sur PC : Caché) --- */
+.hamburger {
+    display: none; 
+}
 
-    /* Sur mobile, on réduit les marges du cadre */
-    .presentation-container {
-        padding: 20px;
-        border-radius: 15px;
+.nav-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 20px; 
+}
+
+/* --- MOBILES (Max 768px) --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Header & Logo */
+    header h1 {
+        display: block;       /* MODIFICATION : On l'affiche */
+        font-size: 1rem;      /* MODIFICATION : Taille réduite pour mobile */
+        margin-right: 50px;   /* MODIFICATION : Marge pour éviter le bouton menu */
+        line-height: 1.2;
     }
     
+    .logo-img {
+        height: 40px; /* Logo plus petit */
+    }
+
+    /* 2. Menu Burger Apparaît */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 25px;
+        z-index: 1001;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: white;
+        transition: 0.3s;
+    }
+
+    /* 3. Menu Déroulant */
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background-color: #0a2351;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: 0.3s;
+        z-index: 1000;
+        padding-top: 80px;
+        margin: 0;
+    }
+
+    .nav-links li {
+        margin: 25px 0;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    /* Animation Croix */
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* 4. Ajustements Contenu */
+    .presentation-container {
+        padding: 20px;
+    }
+
+    /* Les dates se mettent l'une sur l'autre pour être plus faciles à cliquer */
     .date-group {
         flex-direction: column;
         gap: 10px;
     }
-}
 
-/* --- STYLE PANIER --- */
-.panier-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.article-panier {
-    background: white;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 5px solid #ffd700;
+    /* Page Contact : tout en colonne */
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .article-panier {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .article-panier div {
+        width: 100%;
+        text-align: left;
+    }
+    .article-panier button {
+        width: 100%;
+        margin-top: 10px;
+    }
 }

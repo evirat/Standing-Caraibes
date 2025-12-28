@@ -61,19 +61,25 @@
 
     <header>
         <div class="header-brand">
-            <h1>STANDING CARAÏBES RENT'</h1>
-            <img src="../Images/logo2.png" alt="Logo Standing Caraïbes" class="logo-img">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center;">
+                <img src="../Images/logo2.png" alt="Logo" class="logo-img">
+                <h1>STANDING CARAÏBES RENT'</h1>
+            </a>
         </div>
 
         <nav>
-            <ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav-links">
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="../index.html">Location Véhicules</a></li>
-                <li><a href="excursions.html">Excursions Bateau</a></li>
-                <li><a href="../html/evenementiel.html">Événementiel</a></li>
-                <li><a href="#produits-locaux">Produits Locaux</a></li>
+                <li><a href="../index.html#location-vehicules">Location Véhicules</a></li>
+
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="../html/panier.html" style="color:#ffd700;">🛒 Mon Panier</a></li>
+                <li><a href="panier.html" style="color:#ffd700;">🛒 Panier</a></li>
             </ul>
         </nav>
     </header>
@@ -111,7 +117,9 @@
 
             <div class="contact-form">
                 <h3>Envoyer un message</h3>
-                <form action="mailto:votre-email@gmail.com" method="post" enctype="text/plain">
+                
+                <form action="https://formspree.io/f/VOTRE_CODE_ICI" method="POST">
+                    
                     <label>Nom complet</label>
                     <input type="text" name="nom" placeholder="Votre nom" required>
 
@@ -132,5 +140,21 @@
         <p>&copy; 2025 Standing CARAÏBES RENT'. Tous droits réservés.</p>
     </footer>
 
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-links");
+
+        if(hamburger) {
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+
+            document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }));
+        }
+    </script>
 </body>
 </html>

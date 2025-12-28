@@ -31,19 +31,25 @@
 
     <header>
         <div class="header-brand">
-            <h1>STANDING CARAÏBES RENT'</h1>
-            <img src="../Images/logo2.png" alt="Logo Standing Caraïbes" class="logo-img">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center;">
+                <img src="../Images/logo2.png" alt="Logo Standing Caraïbes" class="logo-img">
+                <h1>STANDING CARAÏBES RENT'</h1>
+            </a>
         </div>
 
         <nav>
-            <ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav-links">
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="../index.html">Location Véhicules</a></li>
-                <li><a href="excursions.html">Excursions Bateau</a></li>
-                <li><a href="../html/evenementiel.html">Événementiel</a></li>
-                <li><a href="#produits-locaux">Produits Locaux</a></li>
+                <li><a href="../index.html#location-vehicules">Location Véhicules</a></li>
+
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="../html/panier.html" style="color:#ffd700;">🛒 Mon Panier</a></li>
+                <li><a href="panier.html" style="color:#ffd700;">🛒 Panier</a></li>
             </ul>
         </nav>
     </header>
@@ -80,11 +86,29 @@
     </footer>
 
     <script>
-        // CONFIGURATION : Mettez votre numéro de téléphone ici (Format international sans le +)
-        // Exemple pour la Guadeloupe (+590) : 590690123456
+        // CONFIGURATION : Votre numéro
         const NUMERO_WHATSAPP = "590690409686"; 
 
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. GESTION DU MENU MOBILE (Nouveau Code) ---
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-links");
+
+            if(hamburger) {
+                hamburger.addEventListener("click", () => {
+                    hamburger.classList.toggle("active");
+                    navMenu.classList.toggle("active");
+                });
+
+                document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
+                    hamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                }));
+            }
+            // -----------------------------------------------
+
+            // --- 2. GESTION DU PANIER (Code existant) ---
             const panier = JSON.parse(localStorage.getItem('monPanier')) || [];
             const container = document.getElementById('contenu-panier');
             const totalBlock = document.getElementById('total-block');
@@ -98,13 +122,11 @@
                 container.innerHTML = '';
                 
                 panier.forEach((article, index) => {
-                    let prix = parseFloat(article.prixTotal || article.prix); // Sécurité nom variable
+                    let prix = parseFloat(article.prixTotal || article.prix); 
                     montantTotal += prix;
                     
-                    // On construit le message pour WhatsApp en même temps
                     messageDetails += `- ${article.titre} du ${article.debut} au ${article.fin} (${prix}€)%0A`;
 
-                    // Affichage HTML
                     const div = document.createElement('div');
                     div.className = 'article-panier';
                     div.innerHTML = `
@@ -120,14 +142,10 @@
                     container.appendChild(div);
                 });
 
-                // Mise à jour du Total
                 totalSpan.textContent = montantTotal + " €";
                 totalBlock.style.display = 'block';
 
-                // Création du lien WhatsApp Dynamique
-                // %0A veut dire "Saut de ligne"
-                let texteFinal = `Bonjour, je souhaite réserver :%0A%0A${messageDetails}%0ATotal : ${montantTotal}€.%0A%0AMerci de me confirmer la disponibilité.`;
-                
+                let texteFinal = `Bonjour, je souhaite réserver :%0A%0A${messageDetails}%0ATotal estimé : ${montantTotal}€.%0A%0AMerci de me confirmer la disponibilité.`;
                 btnWhatsApp.href = `https://wa.me/${NUMERO_WHATSAPP}?text=${texteFinal}`;
             }
         });
@@ -136,7 +154,7 @@
             let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
             panier.splice(index, 1);
             localStorage.setItem('monPanier', JSON.stringify(panier));
-            location.reload(); // On recharge la page pour mettre à jour
+            location.reload(); 
         }
 
         function viderPanier() {
